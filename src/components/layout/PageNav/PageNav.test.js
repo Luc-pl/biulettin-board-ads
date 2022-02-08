@@ -1,10 +1,10 @@
 import React from 'react';
 import { shallow } from 'enzyme';
-import { HeaderComponent } from './Header';
+import { PageNavComponent } from './PageNav';
 
-describe('Component Header', () => {
+describe('Component PageNav', () => {
   it('should render without crashing', () => {
-    const component = shallow(<HeaderComponent />);
+    const component = shallow(<PageNavComponent />);
     expect(component).toBeTruthy();
   });
 });
