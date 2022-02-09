@@ -13,7 +13,8 @@ const Component = ({className, isLogged}) => (
   <div className={clsx(className, styles.root)}>
     <Button className={styles.link} component={NavLink} exact to={`${process.env.PUBLIC_URL}/`} activeClassName='active'>HomePage</Button>
     {isLogged && <Button className={styles.link} component={NavLink} to={`${process.env.PUBLIC_URL}/posts`} activeClassName='active'>My posts</Button>}
-    {isLogged ? <Button className={styles.link} component={NavLink} to={`${process.env.PUBLIC_URL}/`} activeClassName='active'>Log Out</Button> 
+    {isLogged 
+      ? <Button className={styles.link} component={NavLink} to={`${process.env.PUBLIC_URL}/`} activeClassName='active'>Log Out</Button> 
       : <Button className={styles.link} component={NavLink} to={`${process.env.PUBLIC_URL}/login`} activeClassName='active'>Log In</Button>
     }
   </div>

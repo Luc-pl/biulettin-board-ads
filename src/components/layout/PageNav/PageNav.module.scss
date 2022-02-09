@@ -1,4 +1,18 @@
 @import '../../../styles/settings.scss';
 
-// .root {
-// }
+.root {
+    padding: $base-size;
+    margin-left: auto;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+}
+  
+.link {
+    background-color: #6ab04c;
+    color: #130f40;
+
+    &:hover {
+        background-color: #badc58;  
+    }
+}
