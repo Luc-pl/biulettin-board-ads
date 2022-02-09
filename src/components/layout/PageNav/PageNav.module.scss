@@ -5,14 +5,17 @@
     margin-left: auto;
     width: 100%;
     display: flex;
-    justify-content: space-between;
+    justify-content: end;
+    font-family: 'Nunito', sans-serif;
 }
   
 .link {
-    background-color: #6ab04c;
+    margin-left: 20px;
+    background-color: #fff;
     color: #130f40;
+    font-family: 'Nunito', sans-serif;
 
     &:hover {
-        background-color: #badc58;  
+        background-color: #6ab04c;  
     }
 }
