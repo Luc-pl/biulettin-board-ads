@@ -2,6 +2,8 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 import clsx from 'clsx';
+import { PageNav } from '../PageNav/PageNav';
+import { Footer } from '../Footer/Footer';
 import { updateLoginStatus } from '../../../redux/loginRedux';
 
 import AppBar from '@material-ui/core/AppBar';
@@ -18,11 +20,7 @@ const Component = ({className, children}) => (
     <AppBar>
       <Container maxWidth='lg'>
         <Toolbar disableGutters>
-          <select onChange={(e) => updateLoginStatus(e.target.value)} >
-            <option value="login">Login</option>
-            <option value="logout">Logout</option>
-            <option value="admin">admin</option>
-          </select>
+          <PageNav />
         </Toolbar>
       </Container>
     </AppBar>
@@ -30,6 +28,7 @@ const Component = ({className, children}) => (
       <Toolbar />
       {children}
     </Container>
+    <Footer />
   </div>
 );
 
