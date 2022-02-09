@@ -4,7 +4,7 @@ import { composeWithDevTools } from 'redux-devtools-extension';
 
 import { initialState } from './initialState';
 import { reducer as postsReducer } from './postsRedux';
-import { reducer as loginReducer } from './loginRedux';
+import loginReducer from './loginRedux';
 
 // define reducers
 const reducers = {
