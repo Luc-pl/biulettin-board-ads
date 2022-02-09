@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Hero } from '../../layout/Hero/Hero';
+import { Cards } from '../../layout/Cards/Cards';
 import clsx from 'clsx';
 
 // import { connect } from 'react-redux';
@@ -11,7 +12,7 @@ import styles from './Homepage.module.scss';
 const Component = ({className, children}) => (
   <div className={clsx(className, styles.root)}>
     <Hero />
-    {children}
+    <Cards />
   </div>
 );
 
