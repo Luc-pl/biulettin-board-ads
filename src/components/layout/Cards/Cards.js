@@ -21,7 +21,7 @@ const Component = ({className, posts}) => {
         <Grid container spacing={4}>
           {posts.map(({ title, image, imageTitle, description, id }) => (
             <Grid item key={title} xs={12} sm={6} md={4}>
-              <Link href={`${process.env.PUBLIC_URL}/post/${id}`}>
+              <Link underline='none' href={`${process.env.PUBLIC_URL}/post/${id}`}>
                 <Card className={styles.card}>
                   <CardMedia
                     className={styles.cardMedia}
