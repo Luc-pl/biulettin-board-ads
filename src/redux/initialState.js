@@ -3,6 +3,7 @@ export const initialState = {
   posts: {
     data: [
       {
+        id: '1',
         title: 'Announcement 1',
         description: 'Lorem ipsum dolorem patern nocem iden duken',
         publicationDate: '2022-02-09',
@@ -15,6 +16,7 @@ export const initialState = {
         imageTitle: 'Image title 1',
       },
       {
+        id: '2',
         title: 'Announcement 2',
         description: 'Lorem ipsum dolorem patern nocem iden duken',
         publicationDate: '2022-02-09',
@@ -27,6 +29,7 @@ export const initialState = {
         imageTitle: 'Image title 2',
       },  
       {
+        id: '3',
         title: 'Announcement 3',
         description: 'Lorem ipsum dolorem patern nocem iden duken',
         publicationDate: '2022-02-08',

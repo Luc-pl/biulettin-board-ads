@@ -8,67 +8,71 @@ import CardContent from '@material-ui/core/CardContent';
 import CardMedia from '@material-ui/core/CardMedia';
 import Card from '@material-ui/core/Card';
 import CardActions from '@material-ui/core/CardActions';
-
-// import { connect } from 'react-redux';
-// import { reduxSelector, reduxActionCreator } from '../../../redux/exampleRedux.js';
-
+import Link from '@material-ui/core/Link';
+import { connect } from 'react-redux';
+import { getAll } from '../../../redux/postsRedux';
+import clsx from 'clsx';
 import styles from './Cards.module.scss';
 
-const posts = [1, 2, 3, 4, 5, 6];
-
-const Component = ({className, children}) => {
+const Component = ({className, children, posts}) => {
   return (
-    <Container className={styles.cardGrid} maxWidth="md">
-      <Grid container spacing={4}>
-        {posts.map((post) => (
-          <Grid item key={post} xs={12} sm={6} md={4}>
-            <Card className={styles.card}>
-              <CardMedia
-                className={styles.cardMedia}
-                image="https://images.unsplash.com/photo-1547891654-e66ed7ebb968?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80"
-                title="Image title"
-              />
-              <CardContent className={styles.cardContent}>
-                <Typography gutterBottom variant="h5" component="h2">
-                    Lorem ipsum
-                </Typography>
-                <Typography>
-                Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque
-                </Typography>
-              </CardContent>
-              <CardActions>
-                <Button size="small" color="primary">
-                    View
-                </Button>
-                <Button size="small" color="primary">
-                    Edit
-                </Button>
-              </CardActions>
-            </Card>
-          </Grid>
-        ))}
-      </Grid>
-    </Container>
+    <div className={clsx(className, styles.root)}>
+      <Container className={styles.cardGrid} maxWidth="md">
+        <Grid container spacing={4}>
+          {posts.map(({ title, image, imageTitle, description, id }) => (
+            <Grid item key={title} xs={12} sm={6} md={4}>
+              <Link href={`${process.env.PUBLIC_URL}/post/${id}`}>
+                <Card className={styles.card}>
+                  <CardMedia
+                    className={styles.cardMedia}
+                    image={image}
+                    title={imageTitle}
+                  />
+                  <CardContent className={styles.cardContent}>
+                    <Typography gutterBottom variant="h5" component="h2">
+                      {title}
+                    </Typography>
+                    <Typography>
+                      {description}
+                    </Typography>
+                  </CardContent>
+                  <CardActions>
+                    <Button size="small" color="primary">
+                        View
+                    </Button>
+                    <Button size="small" color="primary">
+                        Edit
+                    </Button>
+                  </CardActions>
+                </Card>
+              </Link>
+            </Grid>
+          ))}
+        </Grid>
+      </Container>
+    </div>
   );
 };
 
 Component.propTypes = {
   children: PropTypes.node,
   className: PropTypes.string,
+  posts: PropTypes.array,
 };
 
-// const mapStateToProps = state => ({
-//   someProp: reduxSelector(state),
-// });
+const mapStateToProps = state => ({
+  posts: getAll(state),
+});
+
 
 // const mapDispatchToProps = dispatch => ({
 //   someAction: arg => dispatch(reduxActionCreator(arg)),
 // });
 
-// const Container = connect(mapStateToProps, mapDispatchToProps)(Component);
+const ReduxContainer = connect(mapStateToProps)(Component);
 
 export {
-  Component as Cards,
-  // Container as Cards,
+  //Component as Cards,
+  ReduxContainer as Cards,
   Component as CardsComponent,
 };
