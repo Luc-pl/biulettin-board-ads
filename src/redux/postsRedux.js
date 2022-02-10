@@ -2,7 +2,7 @@ import Axios from 'axios';
 import { api } from '../settings.js';
 
 /* selectors */
-export const getAll = ({posts}) => posts.data;
+export const getAllPosts = ({posts}) => posts.data;
 
 /* action name creator */
 const reducerName = 'posts';

@@ -10,11 +10,11 @@ import Card from '@material-ui/core/Card';
 import CardActions from '@material-ui/core/CardActions';
 import Link from '@material-ui/core/Link';
 import { connect } from 'react-redux';
-import { getAll } from '../../../redux/postsRedux';
+import { getAllPosts } from '../../../redux/postsRedux';
 import clsx from 'clsx';
 import styles from './Cards.module.scss';
 
-const Component = ({className, children, posts}) => {
+const Component = ({className, posts}) => {
   return (
     <div className={clsx(className, styles.root)}>
       <Container className={styles.cardGrid} maxWidth="md">
@@ -61,7 +61,7 @@ Component.propTypes = {
 };
 
 const mapStateToProps = state => ({
-  posts: getAll(state),
+  posts: getAllPosts(state),
 });
 
 
