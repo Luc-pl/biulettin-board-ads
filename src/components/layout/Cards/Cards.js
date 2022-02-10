@@ -19,7 +19,7 @@ const Component = ({className, posts}) => {
     <div className={clsx(className, styles.root)}>
       <Container className={styles.cardGrid} maxWidth="md">
         <Grid container spacing={4}>
-          {posts.map(({ title, image, imageTitle, description, id }) => (
+          {posts.map(({ title, image, imageTitle, location, id, publicationDate, price }) => (
             <Grid item key={title} xs={12} sm={6} md={4}>
               <Link underline='none' href={`${process.env.PUBLIC_URL}/post/${id}`}>
                 <Card className={styles.card}>
@@ -32,8 +32,11 @@ const Component = ({className, posts}) => {
                     <Typography gutterBottom variant="h5" component="h2">
                       {title}
                     </Typography>
-                    <Typography>
-                      {description}
+                    <Typography className={styles.cardInfo}>
+                      {`${location} - ${publicationDate}`}
+                    </Typography>
+                    <Typography className={styles.cardPrice}>
+                      {`Price: ${price}$`}
                     </Typography>
                   </CardContent>
                   <CardActions>
