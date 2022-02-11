@@ -24,16 +24,56 @@
     font-family: $font-family;
 }
 
+.cardActions {
+    float: right;
+    position: relative;
+}
+
 .cardInfo {
     font-size: 12px;
     font-style: italic;
     font-family: $font-family;
+    margin: 10px 0;
+    color: #95afc0;
+}
+
+.cardTitle {
+    font-size: 45px;
+    font-family: $font-family;
+    font-weight: 900;
 }
 
 .cardPrice {
-    font-size: 18px;
-    font-weight: 800;
-    margin-top: 10px;
+    font-size: 28px;
+    font-weight: 900;
+    margin: 10px 0;
     font-family: $font-family;
+}
+
+.cardDesc {
+    font-family: $font-family;
+}
+
+.cardAuthor {
+    margin-top: 40px;
+    font-size: 22px;
+    font-weight: 900;
+    font-family: $font-family;
+    color: #95afc0;
+}
+
+.cardPhone {
+    font-size: 28px;
+    font-weight: 900;
+    font-family: $font-family;
+    color: #535c68;
+}
+
+.publicationDate {
+    font-size: 12px;
+    font-style: italic;
+    font-family: $font-family;
+    margin: 10px 0;
+    color: #95afc0;
 }
 

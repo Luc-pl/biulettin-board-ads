@@ -1,8 +1,9 @@
+/* eslint-disable linebreak-style */
 import React from 'react';
 import PropTypes from 'prop-types';
 import Container from '@material-ui/core/Container';
 import Typography from '@material-ui/core/Typography';
-import Button from '@material-ui/core/Button';
+//import Button from '@material-ui/core/Button';
 import Grid from '@material-ui/core/Grid';
 import CardContent from '@material-ui/core/CardContent';
 import CardMedia from '@material-ui/core/CardMedia';
@@ -40,12 +41,12 @@ const Component = ({className, posts}) => {
                     </Typography>
                   </CardContent>
                   <CardActions>
-                    <Button size="small" color="primary">
+                    {/*<Button size="small" color="primary">
                         View
                     </Button>
                     <Button size="small" color="primary">
                         Edit
-                    </Button>
+                    </Button>*/}
                   </CardActions>
                 </Card>
               </Link>
