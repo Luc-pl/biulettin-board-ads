@@ -5,6 +5,7 @@ import PropTypes from 'prop-types';
 //import clsx from 'clsx';
 import { connect } from 'react-redux';
 import { getAllPosts } from '../../../redux/postsRedux';
+import { getLoginState } from '../../../redux/loginRedux';
 // import { reduxSelector, reduxActionCreator } from '../../../redux/exampleRedux.js';
 
 import styles from './Post.module.scss';
@@ -14,11 +15,13 @@ import CardContent from '@material-ui/core/CardContent';
 import CardMedia from '@material-ui/core/CardMedia';
 import Card from '@material-ui/core/Card';
 import Typography from '@material-ui/core/Typography';
+import { CardActions } from '@material-ui/core';
+import Button from '@material-ui/core/Button';
 
-const Component = ({posts, match}) => {
+const Component = ({posts, match, isLogged}) => {
 
   const post = posts.find(el => el.id === match.params.id);
-  const { title, image, imageTitle, description, publicationDate, location, price } = post;
+  const { title, image, imageTitle, description, publicationDate, location, price, id } = post;
 
   return (
     <Container className={styles.cardGrid} maxWidth="md">
@@ -43,6 +46,11 @@ const Component = ({posts, match}) => {
               {`Price: ${price}$`}
             </Typography>
           </CardContent>
+          <CardActions className={styles.cardActions}>
+            {isLogged && (<Button size="medium" color="primary" variant="contained" href={`${process.env.PUBLIC_URL}/post/${id}/edit`}>
+              Edit
+            </Button>)}
+          </CardActions>
         </Card>
       </Grid>
     </Container>
@@ -53,10 +61,12 @@ Component.propTypes = {
   children: PropTypes.node,
   posts: PropTypes.array,
   match: PropTypes.object,
+  isLogged: PropTypes.bool,
 };
 
 const mapStateToProps = state => ({
   posts: getAllPosts(state),
+  isLogged: getLoginState(state),
 });
 
 // const mapDispatchToProps = dispatch => ({
