@@ -10,6 +10,7 @@ import { store } from './redux/store';
 
 import { MainLayout } from './components/layout/MainLayout/MainLayout';
 import { Homepage } from './components/views/Homepage/Homepage';
+import { Login } from './components/views/Login/Login';
 import { Post } from './components/views/Post/Post';
 import { PostEdit } from './components/views/PostEdit/PostEdit';
 import { PostAdd } from './components/views/PostAdd/PostAdd';
@@ -34,6 +35,7 @@ const App = () => (
               <Route exact path={`${process.env.PUBLIC_URL}/post/add`} >
                 {store.getState().isLogged ? <PostAdd /> : <Redirect to={`${process.env.PUBLIC_URL}/login`} />}
               </Route>
+              <Route exact path={`${process.env.PUBLIC_URL}/login`} component={Login} />
               <Route exact path={`${process.env.PUBLIC_URL}/post/:id`} component={Post} />
               <Route exact path={`${process.env.PUBLIC_URL}/post/:id/edit`} component={PostEdit} />
               <Route exact path={`${process.env.PUBLIC_URL}/posts`} component={MyPost} />
