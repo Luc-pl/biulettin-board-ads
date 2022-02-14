@@ -3,11 +3,11 @@ import React from 'react';
 import { BrowserRouter, Switch, Route, Redirect } from 'react-router-dom';
 import { Provider } from 'react-redux';
 
-import { createMuiTheme, StylesProvider, ThemeProvider } from '@material-ui/core/styles';
+import { StylesProvider, ThemeProvider } from '@material-ui/core/styles';
 import { CssBaseline } from '@material-ui/core';
 
 import { store } from './redux/store';
-
+import theme from './theme';
 import { MainLayout } from './components/layout/MainLayout/MainLayout';
 import { Homepage } from './components/views/Homepage/Homepage';
 import { Login } from './components/views/Login/Login';
@@ -17,11 +17,6 @@ import { PostAdd } from './components/views/PostAdd/PostAdd';
 import { MyPost } from './components/views/MyPost/MyPost';
 import { NotFound } from './components/views/NotFound/NotFound';
 
-const theme = createMuiTheme({
-  palette: {
-    primary: { main: '#2B4C6F' },
-  },
-});
 
 const App = () => (
   <Provider store={store}>
