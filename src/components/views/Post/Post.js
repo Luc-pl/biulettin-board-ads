@@ -7,7 +7,7 @@ import { getAllPosts } from '../../../redux/postsRedux';
 import { getLoginState } from '../../../redux/loginRedux';
 import { getCurrentUser } from '../../../redux/userRedux';
 // import { reduxSelector, reduxActionCreator } from '../../../redux/exampleRedux.js';
-
+import { Link } from 'react-router-dom';
 import styles from './Post.module.scss';
 import Grid from '@material-ui/core/Grid';
 import Container from '@material-ui/core/Container';
@@ -59,8 +59,8 @@ const Component = ({posts, match, isLogged, currentUser}) => {
             </Typography>)}
           </CardContent>
           <CardActions className={styles.cardActions}>
-            {(isLogged && (isPostAuthor || isAdmin)) && (<Button size="medium" color="primary" variant="contained" href={`${process.env.PUBLIC_URL}/post/${id}/edit`}>
-              Edit
+            {(isLogged && (isPostAuthor || isAdmin)) && (<Button component={Link} size="medium" color="primary" variant="contained" to={`${process.env.PUBLIC_URL}/post/${id}/edit`}>
+                Edit
             </Button>)}
             <Button size="medium" color="primary" variant="contained" href={`mailto:${authorEmail}`}>
               Email to seller

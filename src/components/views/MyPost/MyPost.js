@@ -1,38 +1,46 @@
 /* eslint-disable linebreak-style */
 import React from 'react';
 import PropTypes from 'prop-types';
+import { getLoginState } from '../../../redux/loginRedux';
 
-import clsx from 'clsx';
-
-// import { connect } from 'react-redux';
+import { Login } from '../Login/Login';
+//import clsx from 'clsx';
+import { connect } from 'react-redux';
 // import { reduxSelector, reduxActionCreator } from '../../../redux/exampleRedux.js';
 
-import styles from './MyPost.module.scss';
+//import styles from './MyPost.module.scss';
 
-const Component = ({className, children}) => (
-  <div className={clsx(className, styles.root)}>
-    <h2>MyPost</h2>
-    {children}
-  </div>
-);
+const Component = ({ isLogged }) => {
+
+  if (isLogged) {
+    return (
+      <div>
+        <h2>MyPosts</h2>
+      </div>
+    );
+  } else {
+    return <Login />;
+  }
+};
 
 Component.propTypes = {
   children: PropTypes.node,
   className: PropTypes.string,
+  isLogged: PropTypes.bool,
 };
 
-// const mapStateToProps = state => ({
-//   someProp: reduxSelector(state),
-// });
+const mapStateToProps = state => ({
+  isLogged: getLoginState(state),
+});
 
 // const mapDispatchToProps = dispatch => ({
 //   someAction: arg => dispatch(reduxActionCreator(arg)),
 // });
 
-// const Container = connect(mapStateToProps, mapDispatchToProps)(Component);
+const Container = connect(mapStateToProps)(Component);
 
 export {
-  Component as MyPost,
-  // Container as MyPost,
+  //Component as MyPost,
+  Container as MyPost,
   Component as MyPostComponent,
 };
