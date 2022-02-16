@@ -1,5 +1,11 @@
 /* eslint-disable linebreak-style */
 export const initialState = {
+  currentUser: {
+    isAdmin: false,
+    name: 'John',
+    email: 'abc@test.com',
+    phone: '789-456-123',
+  },
   isLogged: true,
   posts: {
     data: [
@@ -10,12 +16,12 @@ export const initialState = {
         publicationDate: '2022-02-09',
         lastUpdate: '2022-02-10',
         authorId: '1',
-        authorName: 'Jack',
-        authorEmail: 'test@test.pl',
+        authorName: 'John',
+        authorEmail: 'abc@test.com',
         status: 'draft',
         location: 'Warszawa',
         price: 155,
-        phone: '111-222-333',
+        phone: '789-456-12',
         image: 'https://images.unsplash.com/photo-1501516069922-a9982bd6f3bd?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80',
         imageTitle: 'Image title 1',
       },

@@ -16,13 +16,13 @@ import styles from './MyPost.module.scss';
 
 const Component = ({ isLogged, posts, currentUser }) => {
 
-  const { isAdmin, id: userId } = currentUser;
+  const { isAdmin, email } = currentUser;
   if (isLogged) {
     return (
       <Container className={styles.cardGrid} maxWidth="md">
         <Grid container spacing={4}>
           {posts.map((post) => {
-            if (post.authorId === userId) {
+            if (post.name === email) {
               return (<Grid item key={post.id} xs={12} sm={6} md={4}>
                 <Cards post={post} />
               </Grid>);
