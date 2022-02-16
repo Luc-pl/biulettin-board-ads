@@ -2,21 +2,40 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { getLoginState } from '../../../redux/loginRedux';
+import { getAllPosts } from '../../../redux/postsRedux';
+import { getCurrentUser } from '../../../redux/userRedux';
 
 import { Login } from '../Login/Login';
+import { Cards } from '../../layout/Cards/Cards';
+import Container from '@material-ui/core/Container';
+import Grid from '@material-ui/core/Grid';
 //import clsx from 'clsx';
 import { connect } from 'react-redux';
 // import { reduxSelector, reduxActionCreator } from '../../../redux/exampleRedux.js';
+import styles from './MyPost.module.scss';
 
-//import styles from './MyPost.module.scss';
+const Component = ({ isLogged, posts, currentUser }) => {
 
-const Component = ({ isLogged }) => {
-
+  const { isAdmin, id: userId } = currentUser;
   if (isLogged) {
     return (
-      <div>
-        <h2>MyPosts</h2>
-      </div>
+      <Container className={styles.cardGrid} maxWidth="md">
+        <Grid container spacing={4}>
+          {posts.map((post) => {
+            if (post.authorId === userId) {
+              return (<Grid item key={post.id} xs={12} sm={6} md={4}>
+                <Cards post={post} />
+              </Grid>);
+            } else if (isAdmin) {
+              return (<Grid item key={post.id} xs={12} sm={6} md={4}>
+                <Cards post={post} />
+              </Grid>);
+            } else {
+              return null;
+            }
+          })}
+        </Grid>
+      </Container>
     );
   } else {
     return <Login />;
@@ -24,23 +43,20 @@ const Component = ({ isLogged }) => {
 };
 
 Component.propTypes = {
-  children: PropTypes.node,
-  className: PropTypes.string,
   isLogged: PropTypes.bool,
+  posts: PropTypes.array,
+  currentUser: PropTypes.object,
 };
 
 const mapStateToProps = state => ({
   isLogged: getLoginState(state),
+  posts: getAllPosts(state),
+  currentUser: getCurrentUser(state),
 });
 
-// const mapDispatchToProps = dispatch => ({
-//   someAction: arg => dispatch(reduxActionCreator(arg)),
-// });
-
-const Container = connect(mapStateToProps)(Component);
+const ReduxContainer = connect(mapStateToProps)(Component);
 
 export {
-  //Component as MyPost,
-  Container as MyPost,
+  ReduxContainer as MyPost,
   Component as MyPostComponent,
 };

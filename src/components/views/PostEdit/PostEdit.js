@@ -15,8 +15,7 @@ import { getAllPosts } from '../../../redux/postsRedux';
 import styles from './PostEdit.module.scss';
 
 const Component = ({isLogged, currentUser, title, image, imageTitle, description, price, authorName, phone, authorEmail, authorId: postAuthorId}) => {
-  
-  
+    
   const { isAdmin, id: userId } = currentUser;
   const isPostAuthor = postAuthorId === userId ? true : false;
 
