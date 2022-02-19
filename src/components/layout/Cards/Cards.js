@@ -29,9 +29,9 @@ class Component extends React.Component {
       <div className={styles.root}>
         <Container className={styles.cardGrid} maxWidth="md">
           <Grid container spacing={4}>
-            {posts.map(({ title, photo, photoTitle, location, id, created, price }) => (
+            {posts.map(({ title, photo, photoTitle, location, _id, created, price }) => (
               <Grid item key={title} xs={12} sm={6} md={4}>
-                <Link underline='none' href={`${process.env.PUBLIC_URL}/post/${id}`}>
+                <Link underline='none' href={`${process.env.PUBLIC_URL}/post/${_id}`}>
                   <Card className={styles.card}>
                     <CardMedia
                       className={styles.cardMedia}
@@ -46,7 +46,7 @@ class Component extends React.Component {
                         {`${location} - ${created}`}
                       </Typography>
                       <Typography className={styles.cardPrice}>
-                        {`Price: ${price}$`}
+                        {`Price: ${price}`}
                       </Typography>
                     </CardContent>
                     <CardActions>

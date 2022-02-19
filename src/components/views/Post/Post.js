@@ -3,7 +3,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 //import clsx from 'clsx';
 import { connect } from 'react-redux';
-import { getAllPosts } from '../../../redux/postsRedux';
+import { getAllPosts, fetchPostDetails } from '../../../redux/postsRedux';
 import { getLoginState } from '../../../redux/loginRedux';
 import { getCurrentUser } from '../../../redux/userRedux';
 // import { reduxSelector, reduxActionCreator } from '../../../redux/exampleRedux.js';
@@ -17,70 +17,77 @@ import Card from '@material-ui/core/Card';
 import Typography from '@material-ui/core/Typography';
 import { CardActions } from '@material-ui/core';
 import Button from '@material-ui/core/Button';
-//import PhoneInTalkIcon from '@mui/icons-material/PhoneInTalk';
 
-const Component = ({posts, match, isLogged, currentUser}) => {
+class Component extends React.Component {
 
-  const post = posts.find(el => el.id === match.params.id);
-  const { title, photo, photoTitle, text, created, status, location, price, id, name, update, phone, email, author: postAuthorId } = post;
-  const { isAdmin, id: userId } = currentUser;
-  const isPostAuthor = postAuthorId === userId ? true : false;
+  componentDidMount() {
+    const { match, fetchPostDetails } = this.props;
+    fetchPostDetails(match.params._id);
+  }
 
-  return (
-    <Container className={styles.cardGrid} maxWidth="md">
-      <Grid item>
-        <Card className={styles.card}>
-          <CardMedia
-            className={styles.cardMedia}
-            image={photo}
-            title={photoTitle}
-          />
-          <CardContent className={styles.cardContent}>
-            <Typography className={styles.cardInfo}>
-              {`${location} - ${created}`}
-            </Typography>
-            <Typography gutterBottom variant="h5" component="h2" className={styles.cardTitle}>
-              {title}
-            </Typography>
-            <Typography className={styles.cardPrice}>
-              {`Price: ${price}$`}
-            </Typography>
-            <Typography className={styles.cardDesc}>
-              {text}
-            </Typography>
-            <Typography className={styles.cardAuthor}>
-              {`Seller: ${name}`}
-            </Typography>
-            <Typography className={styles.cardPhone}>
-              {`Phone: ${phone}`} 
-            </Typography>
-            {(isLogged && (isPostAuthor || isAdmin)) && (<Typography>
-              {`Status: ${status}`}
-            </Typography>)}
-          </CardContent>
-          <CardActions className={styles.cardActions}>
-            {(isLogged && (isPostAuthor || isAdmin)) && (<Button component={Link} size="medium" color="primary" variant="contained" to={`${process.env.PUBLIC_URL}/post/${id}/edit`}>
-                Edit
-            </Button>)}
-            <Button size="medium" color="primary" variant="contained" href={`mailto:${email}`}>
-              Email to seller
-            </Button>
-            <Typography className={styles.publicationDate}>
-              {`Edited: ${update}`}
-            </Typography>
-          </CardActions>
-        </Card>
-      </Grid>
-    </Container>
-  );
-};
+  render() {
+    const { post, isLogged, currentUser } = this.props;
+    const { title, photo, photoTitle, text, created, status, location, price, _id, name, update, phone, author } = post;
+    const { isAdmin, email } = currentUser;
+    const isPostAuthor = author === email ? true : false;
+
+    return (
+      <Container className={styles.cardGrid} maxWidth="md">
+        <Grid item>
+          <Card className={styles.card}>
+            <CardMedia
+              className={styles.cardMedia}
+              image={photo}
+              title={photoTitle}
+            />
+            <CardContent className={styles.cardContent}>
+              <Typography className={styles.cardInfo}>
+                {`${location} - ${created}`}
+              </Typography>
+              <Typography gutterBottom variant="h5" component="h2" className={styles.cardTitle}>
+                {title}
+              </Typography>
+              <Typography className={styles.cardPrice}>
+                {`Price: ${price}`}
+              </Typography>
+              <Typography className={styles.cardDesc}>
+                {text}
+              </Typography>
+              <Typography className={styles.cardAuthor}>
+                {`Seller: ${name}`}
+              </Typography>
+              <Typography className={styles.cardPhone}>
+                {`Phone: ${phone}`} 
+              </Typography>
+              {(isLogged && (isPostAuthor || isAdmin)) && (<Typography>
+                {`Status: ${status}`}
+              </Typography>)}
+            </CardContent>
+            <CardActions className={styles.cardActions}>
+              {(isLogged && (isPostAuthor || isAdmin)) && (<Button component={Link} size="medium" color="primary" variant="contained" to={`${process.env.PUBLIC_URL}/post/${_id}/edit`}>
+                  Edit
+              </Button>)}
+              <Button size="medium" color="primary" variant="contained" href={`mailto:${author}`}>
+                Email to seller
+              </Button>
+              <Typography className={styles.publicationDate}>
+                {`Edited: ${update}`}
+              </Typography>
+            </CardActions>
+          </Card>
+        </Grid>
+      </Container>
+    );
+  }
+}
 
 Component.propTypes = {
   children: PropTypes.node,
-  posts: PropTypes.array,
+  post: PropTypes.array,
   match: PropTypes.object,
   isLogged: PropTypes.bool,
   currentUser: PropTypes.object,
+  fetchPostDetails: PropTypes.func,
 };
 
 const mapStateToProps = state => ({
@@ -89,11 +96,11 @@ const mapStateToProps = state => ({
   currentUser: getCurrentUser(state),
 });
 
-// const mapDispatchToProps = dispatch => ({
-//   someAction: arg => dispatch(reduxActionCreator(arg)),
-// });
+const mapDispatchToProps = dispatch => ({
+  fetchPostDetails: (id) => dispatch(fetchPostDetails(id)),
+});
 
-const ReduxContainer = connect(mapStateToProps)(Component);
+const ReduxContainer = connect(mapStateToProps, mapDispatchToProps)(Component);
 
 export {
   //Component as Post,

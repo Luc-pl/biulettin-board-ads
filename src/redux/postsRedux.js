@@ -61,11 +61,11 @@ export const fetchPublished = () => {
 //   };
 // };
 
-export const fetchPostDetails = id => {
+export const fetchPostDetails = _id => {
   return (dispatch, getState) => {
     dispatch(fetchStarted());
     Axios
-      .get(`http://localhost:8000/api/posts/${id}`)
+      .get(`http://localhost:8000/api/posts/${_id}`)
       .then(res => {
         dispatch(fetchPostSuccess(res.data));
       })
@@ -109,6 +109,16 @@ export const reducer = (statePart = [], action = {}) => {
           error: false,
         },
         data: action.payload,
+      };
+    }
+    case FETCH_POST_SUCCESS: {
+      return {
+        ...statePart,
+        loading: {
+          active: false,
+          error: false,
+        },
+        currentPost: action.payload,
       };
     }
     case FETCH_ERROR: {
