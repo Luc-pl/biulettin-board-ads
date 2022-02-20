@@ -1,6 +1,7 @@
+/* eslint-disable linebreak-style */
 import React from 'react';
 import PropTypes from 'prop-types';
-
+import { Link } from 'react-router-dom';
 import clsx from 'clsx';
 import { getLoginState } from '../../../redux/loginRedux';
 import { connect } from 'react-redux';
@@ -23,7 +24,7 @@ const Component = ({ className, children, isLogged }) => {
         <div>
           <Grid container spacing={2} justify="center">
             <Grid item>
-              {isLogged && <Button className={styles.heroButtons} variant="contained" color="primary" href={`${process.env.PUBLIC_URL}/post/add`}>
+              {isLogged && <Button component={Link} className={styles.heroButtons} variant="contained" color="primary" to={`${process.env.PUBLIC_URL}/post/add`}>
                 Add new post
               </Button>}
             </Grid>
