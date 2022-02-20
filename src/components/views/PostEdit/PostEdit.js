@@ -10,8 +10,8 @@ import Grid from '@material-ui/core/Grid';
 import TextField from '@material-ui/core/TextField';
 import { connect } from 'react-redux';
 import { getLoginState } from '../../../redux/loginRedux';
-import { getCurrentUser, fetchPostDetails } from '../../../redux/userRedux';
-import { getAllPosts } from '../../../redux/postsRedux';
+import { getCurrentUser} from '../../../redux/userRedux';
+import { getAllPosts, fetchPostDetails } from '../../../redux/postsRedux';
 import styles from './PostEdit.module.scss';
 
 class Component extends React.Component {

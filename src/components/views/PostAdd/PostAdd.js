@@ -28,6 +28,7 @@ class Component extends React.Component {
     created: '',
     update: '',
   }
+  
 
   componentDidMount() {
     this.props.postToAPI();

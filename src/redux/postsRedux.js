@@ -1,6 +1,6 @@
 /* eslint-disable linebreak-style */
 import Axios from 'axios';
-//import { api } from '../settings.js';
+import { api } from '../settings.js';
 
 /* selectors */
 export const getAllPosts = ({posts}) => posts.data;
@@ -35,7 +35,7 @@ export const fetchPublished = () => {
     const state = getState();
     if (state.posts.data.length === 0 && state.posts.loading.active) {
       Axios
-        .get(`http://localhost:8000/api/posts`)
+        .get(`${api.url}/${api.posts}`)
         .then(res => {
           dispatch(fetchSuccess(res.data));
         })
@@ -61,11 +61,11 @@ export const fetchPublished = () => {
 //   };
 // };
 
-export const fetchPostDetails = _id => {
+export const fetchPostDetails = id => {
   return (dispatch, getState) => {
     dispatch(fetchStarted());
     Axios
-      .get(`http://localhost:8000/api/posts/${_id}`)
+      .get(`${api.url}/${api.posts}/${id}`)
       .then(res => {
         dispatch(fetchPostSuccess(res.data));
       })
@@ -78,7 +78,7 @@ export const fetchPostDetails = _id => {
 export const postToAPI = (post) => {
   return (dispatch, getState) => {
     Axios
-      .put('http://localhost:8000/api/posts/', post)
+      .put(`${api.url}/${api.posts}`, post)
       .then(res => {
         dispatch(addPost(res.data));
         console.log(res.data);
@@ -135,7 +135,7 @@ export const reducer = (statePart = [], action = {}) => {
       return {
         ...statePart,
         data: [
-          ...statePart.data.map(post => post._id === action.payload._id ? action.payload : post),
+          ...statePart.data.map(post => post.id === action.payload.id ? action.payload : post),
         ],
       };
     }
