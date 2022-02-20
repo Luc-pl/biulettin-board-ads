@@ -27,7 +27,7 @@ class Component extends React.Component {
 
   render() {
     const { post, isLogged, currentUser } = this.props;
-    const { title, photo, photoTitle, text, created, status, location, price, _id, name, phone, author } = post;
+    const { photo, title, photoTitle, text, created, status, location, price, _id, name, phone, author } = post;
     const { isAdmin, email } = currentUser;
     const isPostAuthor = author === email ? true : false;
 
@@ -83,7 +83,7 @@ class Component extends React.Component {
 
 Component.propTypes = {
   children: PropTypes.node,
-  post: PropTypes.array,
+  post: PropTypes.object,
   match: PropTypes.object,
   isLogged: PropTypes.bool,
   currentUser: PropTypes.object,
