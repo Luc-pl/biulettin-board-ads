@@ -35,7 +35,7 @@ class Component extends React.Component {
                   <Card className={styles.card}>
                     <CardMedia
                       className={styles.cardMedia}
-                      image={photo}
+                      image={photo || 'https://user-images.githubusercontent.com/194400/49531010-48dad180-f8b1-11e8-8d89-1e61320e1d82.png'}
                       title={photoTitle}
                     />
                     <CardContent className={styles.cardContent}>
@@ -46,7 +46,7 @@ class Component extends React.Component {
                         {`${location} - ${created}`}
                       </Typography>
                       <Typography className={styles.cardPrice}>
-                        {`Price: ${price}`}
+                        {`Price: ${price}$`}
                       </Typography>
                     </CardContent>
                     <CardActions>

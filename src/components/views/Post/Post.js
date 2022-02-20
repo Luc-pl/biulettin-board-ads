@@ -27,7 +27,7 @@ class Component extends React.Component {
 
   render() {
     const { post, isLogged, currentUser } = this.props;
-    const { title, photo, photoTitle, text, created, status, location, price, _id, name, update, phone, author } = post;
+    const { title, photo, photoTitle, text, created, status, location, price, _id, name, phone, author } = post;
     const { isAdmin, email } = currentUser;
     const isPostAuthor = author === email ? true : false;
 
@@ -37,7 +37,7 @@ class Component extends React.Component {
           <Card className={styles.card}>
             <CardMedia
               className={styles.cardMedia}
-              image={photo}
+              image={photo || 'https://user-images.githubusercontent.com/194400/49531010-48dad180-f8b1-11e8-8d89-1e61320e1d82.png'}
               title={photoTitle}
             />
             <CardContent className={styles.cardContent}>
@@ -48,7 +48,7 @@ class Component extends React.Component {
                 {title}
               </Typography>
               <Typography className={styles.cardPrice}>
-                {`Price: ${price}`}
+                {`Price: ${price}$`}
               </Typography>
               <Typography className={styles.cardDesc}>
                 {text}
@@ -71,7 +71,7 @@ class Component extends React.Component {
                 Email to seller
               </Button>
               <Typography className={styles.publicationDate}>
-                {`Edited: ${update}`}
+                {`Edited: ${created}`}
               </Typography>
             </CardActions>
           </Card>
