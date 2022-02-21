@@ -29,17 +29,17 @@ class Component extends React.Component {
     update: '',
   }
   
+  
 
   componentDidMount() {
-    this.props.postToAPI();
+    const { postToAPI } = this.props;
+    postToAPI();
   }
 
   handleClick() {
-    const { postToAPI } = this.props;
     const currentDate = new Date();
 
     this.setState({created: currentDate.toISOString(), update: currentDate.toISOString(), status: 'published'}, () => {
-      postToAPI();
       this.setState({
         name: '',
         email: '',

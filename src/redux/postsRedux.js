@@ -1,6 +1,6 @@
 /* eslint-disable linebreak-style */
 import Axios from 'axios';
-import { api } from '../settings.js';
+//import { api } from '../settings.js';
 
 /* selectors */
 export const getAllPosts = ({posts}) => posts.data;
@@ -35,7 +35,7 @@ export const fetchPublished = () => {
     const state = getState();
     if (state.posts.data.length === 0 && state.posts.loading.active) {
       Axios
-        .get(`${api.url}/${api.posts}`)
+        .get(`http://localhost:8000/api/posts`)
         .then(res => {
           dispatch(fetchSuccess(res.data));
         })
@@ -65,7 +65,7 @@ export const fetchPostDetails = id => {
   return (dispatch, getState) => {
     dispatch(fetchStarted());
     Axios
-      .get(`${api.url}/${api.posts}/${id}`)
+      .get(`http://localhost:8000/api/posts/${id}`)
       .then(res => {
         dispatch(fetchPostSuccess(res.data));
       })
@@ -78,7 +78,7 @@ export const fetchPostDetails = id => {
 export const postToAPI = (post) => {
   return (dispatch, getState) => {
     Axios
-      .put(`${api.url}/${api.posts}`, post)
+      .put('http://localhost:8000/api/posts/', post)
       .then(res => {
         dispatch(addPost(res.data));
         console.log(res.data);

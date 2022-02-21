@@ -9,6 +9,7 @@ export const initialState = {
   },
   isLogged: true,
   posts: {
+    currentPost: {},
     data: [
     //   {
     //     _id: '1',
