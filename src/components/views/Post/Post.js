@@ -21,13 +21,13 @@ import Button from '@material-ui/core/Button';
 class Component extends React.Component {
 
   componentDidMount() {
-    const { match, fetchPostDetails } = this.props;
-    fetchPostDetails(match.params._id);
+    const { fetchPost } = this.props;
+    fetchPost();
   }
 
   render() {
     const { post, isLogged, currentUser } = this.props;
-    const { photo, title, photoTitle, text, created, status, location, price, _id, phone, author } = post;
+    const { photo, title, text, created, updated, status, location, price, _id, phone, author } = post;
     const { isAdmin, email } = currentUser;
     const isPostAuthor = author === email ? true : false;
 
@@ -38,7 +38,7 @@ class Component extends React.Component {
             <CardMedia
               className={styles.cardMedia}
               image={photo || 'https://user-images.githubusercontent.com/194400/49531010-48dad180-f8b1-11e8-8d89-1e61320e1d82.png'}
-              title={photoTitle}
+    
             />
             <CardContent className={styles.cardContent}>
               <Typography className={styles.cardInfo}>
@@ -71,7 +71,7 @@ class Component extends React.Component {
                 Email to seller
               </Button>
               <Typography className={styles.publicationDate}>
-                {`Edited: ${created}`}
+                {`Edited: ${updated}`}
               </Typography>
             </CardActions>
           </Card>
@@ -84,10 +84,9 @@ class Component extends React.Component {
 Component.propTypes = {
   children: PropTypes.node,
   post: PropTypes.object,
-  match: PropTypes.object,
   isLogged: PropTypes.bool,
   currentUser: PropTypes.object,
-  fetchPostDetails: PropTypes.func,
+  fetchPost: PropTypes.func,
 };
 
 const mapStateToProps = state => ({
@@ -96,8 +95,8 @@ const mapStateToProps = state => ({
   currentUser: getCurrentUser(state),
 });
 
-const mapDispatchToProps = dispatch => ({
-  fetchPostDetails: (id) => dispatch(fetchPostDetails(id)),
+const mapDispatchToProps = (dispatch, props) => ({
+  fetchPost: () => dispatch(fetchPostDetails(props.match.params._id)),
 });
 
 const ReduxContainer = connect(mapStateToProps, mapDispatchToProps)(Component);

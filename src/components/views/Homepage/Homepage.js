@@ -10,11 +10,12 @@ import clsx from 'clsx';
 
 import styles from './Homepage.module.scss';
 
-const Component = ({className, children}) => (
-  <div className={clsx(className, styles.root)}>
+const Component = ({ className, children }) => (
+  <main className={clsx(className, styles.root)}>
     <Hero />
     <Cards />
-  </div>
+    {children}
+  </main>
 );
 
 Component.propTypes = {
