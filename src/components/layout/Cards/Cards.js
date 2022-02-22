@@ -35,8 +35,6 @@ class Component extends React.Component {
 }
 
 Component.propTypes = {
-  children: PropTypes.node,
-  className: PropTypes.string,
   posts: PropTypes.array,
   fetchPublishedPosts: PropTypes.func,
 };

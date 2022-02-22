@@ -27,7 +27,7 @@ class Component extends React.Component {
 
   render() {
     const { post, isLogged, currentUser } = this.props;
-    const { photo, title, photoTitle, text, created, status, location, price, _id, name, phone, author } = post;
+    const { photo, title, photoTitle, text, created, status, location, price, _id, phone, author } = post;
     const { isAdmin, email } = currentUser;
     const isPostAuthor = author === email ? true : false;
 
@@ -54,7 +54,7 @@ class Component extends React.Component {
                 {text}
               </Typography>
               <Typography className={styles.cardAuthor}>
-                {`Seller: ${name}`}
+                {`Seller: ${author}`}
               </Typography>
               <Typography className={styles.cardPhone}>
                 {`Phone: ${phone}`} 
