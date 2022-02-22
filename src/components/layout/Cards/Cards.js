@@ -2,14 +2,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import Container from '@material-ui/core/Container';
-import Typography from '@material-ui/core/Typography';
 //import Button from '@material-ui/core/Button';
 import Grid from '@material-ui/core/Grid';
-import CardContent from '@material-ui/core/CardContent';
-import CardMedia from '@material-ui/core/CardMedia';
-import Card from '@material-ui/core/Card';
-import CardActions from '@material-ui/core/CardActions';
-import Link from '@material-ui/core/Link';
+import { Card } from '../../common/Card/Card';
 import { connect } from 'react-redux';
 import { getAllPosts, fetchPublished } from '../../../redux/postsRedux';
 //import clsx from 'clsx';
@@ -26,44 +21,15 @@ class Component extends React.Component {
     const { posts } = this.props;
 
     return (
-      <div className={styles.root}>
-        <Container className={styles.cardGrid} maxWidth="md">
-          <Grid container spacing={4}>
-            {posts.map(({ title, photo, photoTitle, location, _id, created, price }) => (
-              <Grid item key={title} xs={12} sm={6} md={4}>
-                <Link underline='none' href={`${process.env.PUBLIC_URL}/post/${_id}`}>
-                  <Card className={styles.card}>
-                    <CardMedia
-                      className={styles.cardMedia}
-                      image={photo || 'https://user-images.githubusercontent.com/194400/49531010-48dad180-f8b1-11e8-8d89-1e61320e1d82.png'}
-                      title={photoTitle}
-                    />
-                    <CardContent className={styles.cardContent}>
-                      <Typography gutterBottom variant="h5" component="h2">
-                        {title}
-                      </Typography>
-                      <Typography className={styles.cardInfo}>
-                        {`${location} - ${created}`}
-                      </Typography>
-                      <Typography className={styles.cardPrice}>
-                        {`Price: ${price}$`}
-                      </Typography>
-                    </CardContent>
-                    <CardActions>
-                      {/*<Button size="small" color="primary">
-                          View
-                      </Button>
-                      <Button size="small" color="primary">
-                          Edit
-                      </Button>*/}
-                    </CardActions>
-                  </Card>
-                </Link>
-              </Grid>
-            ))}
-          </Grid>
-        </Container>
-      </div>
+      <Container className={styles.cardGrid} maxWidth="md">
+        <Grid container spacing={4}>
+          {posts.map((post) => (
+            <Grid item key={post.id} xs={12} sm={6} md={4}>
+              <Card post={post} />
+            </Grid>
+          ))}
+        </Grid>
+      </Container>
     );
   }
 }
